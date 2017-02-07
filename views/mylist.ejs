@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%if (locals.topic){%>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h2><%= topic.title %></h2>
+        <%= topic.description %>
+      </div>
+    </div>
+    <%}else{%>
+      <h2>Welcome</h2>
+      It is your link collector list!!!
+    <%}%>
+  </div>
+</div>
