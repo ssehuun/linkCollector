@@ -1,15 +1,32 @@
+<style>
+
+</style>
+
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%if (locals.topic){%>
     <div class="panel panel-default">
       <div class="panel-body">
-        <h2><%= topic.title %></h2>
-        <%= topic.description %>
+
+        <% for(var i=0; i<links.length; i++){ %>
+          <li class="list">
+            <a href="http://<%= links[i].title %>" target="_blank"><%= links[i].title %></a>
+            <%= links[i].description %>
+            <button class="delBtn">링크삭제</button>
+            <button class="cpyBtn">링크복사</button>
+          </li>
+        <% } %>
+
       </div>
     </div>
-    <%}else{%>
-      <h2>Welcome</h2>
-      It is your link collector list!!!
-    <%}%>
   </div>
 </div>
+
+<script type="text/javascript">
+  $('button.delBtn').on("click", function(){
+    $.post('/delete', function(){
+      $(this).parent().fadeOut(1000, function(){
+        $(this).parent().removeClass("list");
+      });
+    });
+  });
+</script>
