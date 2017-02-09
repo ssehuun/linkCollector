@@ -55,13 +55,48 @@ app.post('/add', function(req, res){
   });
 });
 
-app.get('/delete', function(req, res){
-  
-  var sql = 'DELETE from link WHERE id=?';
-  conn.query(sql, [title], function(err, links, fields){
 
+app.get('/edit', function(req, res){
+  var title = req.query.title;
+  var sql = 'SELECT * From link WHERE title=?';
+  conn.query(sql, [title], function(err, link, fiedls){
+    if(err){
+      console.log(err);
+      res.status(500).send('Internal Server error');
+    }else{
+      res.render('edit', {link:link});
+    }
   });
 });
+
+app.post('/edit', function(req, res){
+  var title = req.body.title;
+  var description = req.body.description;
+  var sql = 'UPDATE link SET description=? WHERE title=?';
+  conn.query(sql, [description, title], function(err, links, fields){
+    if(err){
+      console.log(err);
+      res.status(500).send('Internal Server error');
+    }else{
+      res.redirect('/add');
+    }
+  });
+});
+
+app.post('/delete', function(req, res){
+  var title = req.body.title;
+  var sql = 'DELETE from link WHERE title=?';
+  conn.query(sql, [title], function(err, links, fields){
+    if(err){
+      console.log(err);
+      res.status(500).send('Internal Server error');
+    }else{
+      res.redirect('/add');
+    }
+  });
+});
+
+
 //404 error handling
 app.use(function (req, res, next) {
   var error = '<h1>FUCK! 404 Error!</h1>';

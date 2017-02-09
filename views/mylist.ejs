@@ -8,12 +8,13 @@
       <div class="panel-body">
 
         <% for(var i=0; i<links.length; i++){ %>
-          <li class="list">
-            <a href="http://<%= links[i].title %>" target="_blank"><%= links[i].title %></a>
-            <%= links[i].description %>
+          <div class="list">
+            <a href="http://<%= links[i].title %>" class="link" target="_blank"><%= links[i].title %></a>
+            <span><%= links[i].description %></span>
             <button class="delBtn">링크삭제</button>
             <button class="cpyBtn">링크복사</button>
-          </li>
+            <button class="editBtn">링크편집</button>
+          </div>
         <% } %>
 
       </div>
@@ -22,11 +23,26 @@
 </div>
 
 <script type="text/javascript">
+  $('button.editBtn').on("click", function(){
+
+    var title = $(this).prev().prev().prev().prev(".link").text();
+    $.ajax({
+      url:'/edit',
+      data:{title:title},
+      dataType:'html',
+      success:function(data){
+        $(data).insertAfter(".panel")
+        console.log(data);
+      }
+    })
+  });
   $('button.delBtn').on("click", function(){
-    $.post('/delete', function(){
-      $(this).parent().fadeOut(1000, function(){
-        $(this).parent().removeClass("list");
-      });
+    var title = $(this).prev().prev(".link").text();
+    $(this).parent().fadeOut(1000, function(){
+      $(this).parent().removeClass("list");
+    });
+    $.post('/delete', {title : title}, function(){
+      console.log("deleted "+title);
     });
   });
 </script>
