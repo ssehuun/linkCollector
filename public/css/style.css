@@ -1,0 +1,58 @@
+
+.header{
+  padding:20px;
+}
+#brand{
+  text-decoration: none;
+}
+body{
+  background: url('/static/images/bridge.jpg') left top;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/*#cf{
+  position:relative;
+  height:281px;
+  width:450px;
+  margin:0 auto;
+}
+
+#cf img {
+  position:absolute;
+  left:0;
+  top:0
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+
+}
+
+#cf img.top:hover {
+  opacity:0;
+}*/
+
+/*
+@keyframes cf3FadeInOut {
+  0% {
+    opacity:1;
+  }
+  45% {
+    opacity:1;
+  }
+  55% {
+    opacity:0;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
+body img.top {
+  animation-name: cf3FadeInOut;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+  animation-direction: alternate;
+}*/
